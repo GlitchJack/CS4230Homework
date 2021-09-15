@@ -2,7 +2,7 @@ package edu.weber.servlet;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Set;
+import java.util.HashMap;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,35 +48,35 @@ public class MyServletTests {
 
 		testObj.doGet(request, response);
 
-		verify(request).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
+		verify(request, times(2)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
 		
 		Assert.assertNotNull(servletRequestCapture.getValue());
 	}
 	
 	@Test
 	public void doGetHasRequestAttributeContactsHasDefault() throws ServletException, IOException {
-		ArgumentCaptor<Set<Contact>> servletRequestCapture = ArgumentCaptor.forClass(Set.class);
+		ArgumentCaptor<HashMap<String,Contact>> servletRequestCapture = ArgumentCaptor.forClass(HashMap.class);
 
 		when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
 
 		testObj.doGet(request, response);
 
-		verify(request).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
+		verify(request, times(2)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
 
-		Set contactsCollection = servletRequestCapture.getValue();
+		HashMap<String,Contact> contactsCollection = servletRequestCapture.getValue();
 		Assert.assertTrue(contactsCollection.size() > 0);
 
 	}
 	
 	@Test
-	public void doPostHasRequestAttribute() throws ServletException, IOException{
-		ArgumentCaptor<Collection> servletRequestCapture = ArgumentCaptor.forClass(Collection.class);
+	public void doPostGetParameters() throws ServletException, IOException{
+		ArgumentCaptor<String> servletRequestCapture = ArgumentCaptor.forClass(String.class);
 		
-		when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
+		//when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
 
 		testObj.doPost(request, response);
 
-		verify(request).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
+		verify(request, times(5)).getParameter(servletRequestCapture.capture());
 		
 		Assert.assertNotNull(servletRequestCapture.getValue());
 	}
