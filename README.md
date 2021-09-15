@@ -15,5 +15,5 @@ Run command: mvn clean install
 
 Start Tomcat server from "Servers" tab
 
-Open browser window and go to localhost:{Tomcat Port #, likely 8080}
+Open browser window and go to "localhost:{Tomcat Port #, likely 8080}"
 (if you are unsure of which port, open Tomcat Server from "Servers" tab and look under Ports section)
