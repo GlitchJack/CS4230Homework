@@ -45,10 +45,11 @@ public class MyServletTests {
 		ArgumentCaptor<Collection> servletRequestCapture = ArgumentCaptor.forClass(Collection.class);
 
 		when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
-
+		when(request.getParameter("errormessage")).thenReturn("");
+		
 		testObj.doGet(request, response);
 
-		verify(request, times(2)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
+		verify(request,times(3)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
 		
 		Assert.assertNotNull(servletRequestCapture.getValue());
 	}
@@ -58,10 +59,11 @@ public class MyServletTests {
 		ArgumentCaptor<HashMap<String,Contact>> servletRequestCapture = ArgumentCaptor.forClass(HashMap.class);
 
 		when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
-
+		//when(request.getParameter("errormessage")).thenReturn("");
+		
 		testObj.doGet(request, response);
 
-		verify(request, times(2)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
+		verify(request,times(3)).setAttribute(ArgumentMatchers.any(String.class), servletRequestCapture.capture());
 
 		HashMap<String,Contact> contactsCollection = servletRequestCapture.getValue();
 		Assert.assertTrue(contactsCollection.size() > 0);
@@ -69,14 +71,16 @@ public class MyServletTests {
 	}
 	
 	@Test
-	public void doPostGetParameters() throws ServletException, IOException{
+	public void doPostParameters() throws ServletException, IOException{
 		ArgumentCaptor<String> servletRequestCapture = ArgumentCaptor.forClass(String.class);
 		
 		//when(request.getRequestDispatcher(ArgumentMatchers.any(String.class))).thenReturn(requestDispatcher);
-
+		when(request.getParameter("homeaddr")).thenReturn("home");
+		when(request.getParameter("busiaddr")).thenReturn("business");
+		
 		testObj.doPost(request, response);
 
-		verify(request, times(5)).getParameter(servletRequestCapture.capture());
+		verify(request, times(6)).getParameter(servletRequestCapture.capture());
 		
 		Assert.assertNotNull(servletRequestCapture.getValue());
 	}

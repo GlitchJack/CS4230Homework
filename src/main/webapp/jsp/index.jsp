@@ -24,11 +24,12 @@
   			<input type="text" id="lname" name="lname" required><br>
   			<label for="phonenum">Phone Number:</label><br>
   			<input type="text" id="phonenum" name="phonenum"><br>
-  			<label for="homeaddr">Home Address:</label><br>
+  			<label for="homeaddr">Home Address*:</label><br>
   			<input type="text" id="homeaddr" name="homeaddr"><br>
-  			<label for="busiaddr">Business Address:</label><br>
+  			<label for="busiaddr">Business Address*:</label><br>
   			<input type="text" id="busiaddr" name="busiaddr"><br>
   			<input type="submit" value="Add Contact">
 		</form>
+		<c:out value="${errormessage}"></c:out>
 	</body>
 </html>

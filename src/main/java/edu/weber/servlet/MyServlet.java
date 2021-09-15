@@ -61,7 +61,9 @@ public class MyServlet extends HttpServlet {
 //			writer.println(objectMapper.writeValueAsString(map.get(i)));
 		
 		req.setAttribute("contacts", map.keySet());
+		req.setAttribute("errormessage", req.getParameter("errormessage"));
 		req.setAttribute("contactMap", map);
+		
 		req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
 		
 		
@@ -79,13 +81,20 @@ public class MyServlet extends HttpServlet {
 		
 		//No duplicate keys(firstnames) for now
 		if(map.get(fname) != null) {
-			resp.sendRedirect("./");
+			req.getRequestDispatcher("/").forward(req, resp);
+			return;
+		}
+		
+		if(req.getParameter("homeaddr").equals("") && req.getParameter("busiaddr").equals("")) {
+			resp.sendRedirect("./?errormessage=Must Have an address");
+			return;
 		}
 		
 		//add contact to map
 		Contact temp = new Contact(fname, lname, phonenum, homeaddr, busiaddr);
 		map.put(temp.getFirstName(), temp);
 		
+		//resp.sendRedirect("./");
 		resp.sendRedirect("./");
 	}
 
