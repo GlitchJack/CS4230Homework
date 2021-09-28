@@ -8,11 +8,11 @@
 		<h1>Contacts</h1>
 		<ul>
 		 <c:forEach items="${contacts}" var="contact">
-    		<li><c:out value="${contactMap.get(contact).getFirstName()}"></c:out> 
-    			<c:out value="${contactMap.get(contact).getLastName()} {"></c:out>
-    			<c:out value="Phone Num: (${contactMap.get(contact).getPhoneNum()})"></c:out>
-    			<c:out value="Home Address: (${contactMap.get(contact).getHomeAddress()})"></c:out>
-    			<c:out value="Business Address: (${contactMap.get(contact).getBusinessAddress()})}"></c:out></li>
+    		<li><c:out value="${contact.firstName}"></c:out>
+    			<c:out value="${contact.lastName}"></c:out>
+    			<c:out value="Phone Num: (${contact.phoneNum})"></c:out>
+    			<c:out value="Home Address: (${contact.homeAddress})"></c:out>
+    			<c:out value="Business Address: (${contact.businessAddress})}"></c:out></li>
 		</c:forEach>
 		</ul>
 		<h2>Add Contact Form</h2>
