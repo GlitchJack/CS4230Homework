@@ -19,12 +19,17 @@ public class ContactRepository {
 	private DataSource dataSource;
 	private Connection db;
 	
+	public ContactRepository(DataSource ds, Connection db) {
+		this.dataSource = ds;
+		this.db = db;
+	}
+	
 	private ContactRepository() {
 		this.dataSource = DatabaseConnection.getDataSource();
 		try {
 			this.db = this.dataSource.getConnection();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -57,11 +62,11 @@ public class ContactRepository {
 		
 		try {
 			PreparedStatement insertStatement = null;
-			try {
-				insertStatement = db.prepareStatement(CONTACT_INSERT.toString(), Statement.RETURN_GENERATED_KEYS);
-			}catch(NullPointerException e) {
-				
-			}
+//			try {
+			insertStatement = db.prepareStatement(CONTACT_INSERT.toString(), Statement.RETURN_GENERATED_KEYS);
+//			}catch(NullPointerException e) {
+//				
+//			}
 			
 			insertStatement.setString(1, c.getFirstName());
 			insertStatement.setString(2, c.getLastName());
@@ -73,10 +78,10 @@ public class ContactRepository {
 			{
 				return;
 			}else {
-				System.out.println("Row not inserted");
+				//System.out.println("Row not inserted");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	

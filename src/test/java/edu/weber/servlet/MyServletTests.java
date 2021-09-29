@@ -104,7 +104,7 @@ public class MyServletTests {
 	
 	@Test
 	public void myServletConstructorCanGetRepoInstance() throws ServletException, IOException{
-		Assert.assertNotNull(new MyServlet());
+		Assert.assertNotNull(new MyServlet(service));
 	}
 	
 	@Test

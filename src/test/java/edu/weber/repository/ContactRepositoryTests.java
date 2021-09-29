@@ -40,17 +40,18 @@ public class ContactRepositoryTests {
 	
 	@Before
 	public void setup() {
-		testRepo = ContactRepository.getInstance();
+//		testRepo = ContactRepository.getInstance();
+		testRepo = new ContactRepository(source,conn);
 	}
 	
-	@Test
-	public void getAllContactsCanGetContacts() throws ServletException, IOException{
-		
-	}
+//	@Test
+//	public void getAllContactsCanGetContacts() throws ServletException, IOException{
+//		
+//	}
 	
 	@Test
 	public void getInstanceCanMakeNewObject() throws ServletException, IOException{
-		Assert.assertNotNull(ContactRepository.getInstance());
+		Assert.assertNotNull(testRepo);
 	}
 	
 	@Test
@@ -60,6 +61,5 @@ public class ContactRepositoryTests {
 		}catch(RuntimeException e) {
 			Assert.assertTrue(true);
 		}
-		
 	}
 }
